@@ -142,81 +142,74 @@
 					var scale1 = 1;
 
 					var scale2 = 1;
-					
+
+					var i = 0;
+					var j = 0;
+
+					var speed  = 1.004;
+
+					var sourceImg = this.$refs['img'];
+					var p0Img = this.$refs['imgp0'];
+
 					/*context.drawImage(this.$refs['imgp0'],0,y,w,h,0,0,s.viewW,s.viewH);
 					context.drawImage(this.$refs['img'],0,0,w*2,h*2,0,0,s.viewW,s.viewH);*/
-					setTimeout(()=>{
-							 	 
-						
-						//context.scale(1.2,1.2);
-						
-
-									/*context.save();
-								 	
-										
-									context.restore();*/
-
-						var t = setInterval(()=>{
+					var t = setInterval(()=>{
 							
-							 w1 *= 1.004,
-								 h1 *= 1.004;
+							 w1 *= speed,
+								 h1 *= speed;
 							context.clearRect(0,0,s.viewW,s.viewH);
 							 if(scale<=1){
-							 	 scale1*=1.004;
-							 	 ///scale1*=1.004;
+							 	scale = 1;
+							 	 scale1*=speed;
+							 	 ///scale1*=speed;
 							 	 w = s.viewW,
 								 h = s.viewH;
 								 w *=scale1,
 								 h *=scale1;
 
-								
+								i+=1;
+								j+=4.54;
 								//context.drawImage(this.$refs['imgp0'],0,0,w,h,0,0,s.viewW,s.viewH);
 
-								context.drawImage(this.$refs['imgp0'],s.viewW*1275/1875*2.5,s.viewH*1371/3015*2.5,w-1,h-4,0,0,s.viewW,s.viewH);
+								context.drawImage(p0Img,s.viewW*1275/1875*2.5-j,s.viewH*1371/3015*2.5-j,w-1,h-4,0,0,s.viewW,s.viewH);
 
-								context.drawImage(this.$refs['img'],0,0,w1,h1,0,0,s.viewW,s.viewH); 
-									context.save();
+								//context.drawImage(sourceImg,0,0,w1,h1,i*scale1,i*scale1,s.viewW,s.viewH); 
 								 	//context.translate(s.viewW*1275/1875,s.viewH*1372/3015);
-									//context.drawImage(this.$refs['img'],0,0,w1*scale2,h1*scale2,0,0,s.viewW,s.viewH); 	
-									context.restore();
+									//context.drawImage(sourceImg,0,0,w1*scale2,h1*scale2,0,0,s.viewW,s.viewH); 		
 
 								if(scale1>=2.5){
 									console.log(w1,w);
 								 	clearInterval(t);
-								 	//context.drawImage(this.$refs['imgp0'],0,0,s.viewW*2.5,s.viewH*2.5,0,0,s.viewW,s.viewH);
-									context.drawImage(this.$refs['imgp0'],s.viewW*1275/1875*2.5,s.viewH*1371/3015*2.5,w-1,h-4,0,0,s.viewW,s.viewH);
-									context.save();
-									context.drawImage(this.$refs['img'],0,0,w1,h1,0,0,s.viewW,s.viewH); 
+								 	//context.drawImage(p0Img,0,0,s.viewW*2.5,s.viewH*2.5,0,0,s.viewW,s.viewH);
+								 	context.scale(1.002,1.002);
+									context.drawImage(p0Img,s.viewW*1275/1875*2.5-j,s.viewH*1371/3015*2.5-j,w-1,h-4,0,0,s.viewW,s.viewH);
+									
+								///	context.drawImage(sourceImg,0,0,w1,h1,j*2.5,j*2.5,s.viewW,s.viewH); 
 								 	//context.translate(s.viewW*1275/1875,s.viewH*1372/3015);
 
-									//context.drawImage(this.$refs['img'],0,0,w1*scale2,h1*scale2,0,0,s.viewW,s.viewH); 	
-									context.restore();
+									//context.drawImage(sourceImg,0,0,w1*scale2,h1*scale2,0,0,s.viewW,s.viewH); 	
 								 }
 							 	//clearInterval(t);
 							 }else{
 
-							 		
-							 	 scale/=1.004;
+							 	 
+							 	 scale/=speed;
 							 	 
 								 w = s.viewW/scale,
 								 h = s.viewH/scale;
-								 
-								 	console.log(2)
-									context.drawImage(this.$refs['imgp0'],s.viewW*1275/1875*2.5,s.viewH*1371/3015*2.5,w-1,h-4,0,0,s.viewW,s.viewH);
-									context.drawImage(this.$refs['img'],0,0,w1,h1,0,0,s.viewW,s.viewH); 	
-									context.save();
-								 	//context.translate(s.viewW*1275/1875,s.viewH*1372/3015);
-									context.restore();
+								///context.drawImage(p0Img,s.viewW*1275/1875*2.5,s.viewH*1371/3015*2.5,w-1,h-4,0,0,s.viewW,s.viewH);
+								i++;
+								j++;
+								context.drawImage(p0Img,s.viewW*1275/1875*2.5-i,s.viewH*1371/3015*2.5-i,w-1,h-4,0,0,s.viewW,s.viewH);
+
+								context.drawImage(sourceImg,0,0,w1,h1,i*scale ,i*scale,s.viewW,s.viewH); 	
+								context.save();
+							 	
+								context.restore();
 							 }
 
 							 //scale-=.02;
-							 
-
-
-							
-								
-						},30)
-					},0)
+						},10)
 
 			}
 			

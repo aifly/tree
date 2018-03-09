@@ -21,7 +21,6 @@ html, body {
 body {
 	font-family: "Helvetica Neue", 'Helvetica', "Microsoft YaHei", '微软雅黑', arial, sans-serif;
 	font-size: 30px;
-	background: #f00;
 
 	&>div {
 	}
@@ -37,12 +36,14 @@ img {
 
 $baseColor: #fcffb4;
 $viewW: 750px;
+$bgColor: #fcfff8;
 
 .zmiti-index-main-ui {
 	overflow: hidden;
 	width: 10rem;
 	left: 50%;
 	margin-left: -$viewW/2;
+	background: $bgColor;
 
 	.zmiti-createimg {
 		@include transform(scale(.75));
@@ -70,26 +71,95 @@ $viewW: 750px;
 
 	}
 
-	.zmiti-p2 {
-		@include transformOrigin(90%);
-		///@include transform(translate3d(-12rem, -4rem, 0));
-		@include transition(5s);
+	.zmiti-leaf {
+		@include pos(a);
+		left: 0;
 	}
 
-	canvas {
+	.zmiti-leaf1 {
+		right: -.2rem;
+		left: auto;
+	}
+
+	&>section {
+		@include displayBox(vertical);
+	}
+
+	.zmiti-title {
+		width: 7rem;
+		height: 2rem;
+		@include pos(r);
+
+		img {
+			margin-top: .8rem;
+			display: block;
+		}
+
+	}
+
+	.zmiti-border {
+		-webkit-box-flex: 1;
+		@include pos(r);
+		width: 10rem;
+		overflow: hidden;
+
+		&>img {
+			width: 100%;
+			height: 100%;
+			@include pos(a);
+			z-index: 100;
+		}
+
+		.zmiti-xdd {
+			@include pos(a);
+			z-index: 1;
+			width: 1050px;
+			height: 1050px;
+			@include transition(.1s);
+
+			img {
+				width: 100%;
+				height: 100%;
+			}
+
+		}
+
+	}
+
+	.zmiti-index-bottom {
+		height: 2.5rem;
+		width: 10rem;
 		box-sizing: border-box;
+		@include displayBox(vertical);
+
+		.zmiti-btn2 {
+			@include pos(r);
+			color: #fffb88;
+
+			span {
+				@include pos(a);
+				width: 100%;
+				height: 100%;
+				left: 0;
+				top: 22px;
+				text-align: center;
+				font-size: .38rem;
+			}
+
+		}
+
+		.zmiti-logo {
+			img {
+				width: .8rem;
+				height: .8rem;
+			}
+
+			font-size: .38rem;
+			@include transform(scale(.8));
+		}
+
 	}
 
-}
-
-.zmiti-cache-img {
-	width: auto;
-	height: auto;
-	@include pos(a);
-	z-index: -1;
-	left: 0;
-	opacity: 0;
-	display: none;
 }
 
 .zmiti-loading {

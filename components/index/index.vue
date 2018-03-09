@@ -1,23 +1,37 @@
 <template>
 	<div  class="lt-full zmiti-index-main-ui "  :class="{'show':show}">
-
-		<transition name="zmiti-scale"
-			@after-enter="afterEnter"
-		 >
-		    <div class="zmiti-createimg" v-if='createImg'>
-				<img :src="createImg" alt="">
-			</div>
-		  </transition>
-		<div v-if='!createImg'  class="lt-full">
-			<canvas ref='canvas' :width='750' :height="1206"></canvas>
+		<div class="zmiti-leaf">
+			<img :src="imgs.leaf1" alt="">
+		</div>
+		<div class="zmiti-leaf zmiti-leaf1">
+			<img :src="imgs.leaf2" alt="">
 		</div>
 
-		<img  class="zmiti-cache-img" :style="{width:width*2+'px',height:height*2+'px'}" :src="imgs.bg" alt="" ref='imgp0'>
-		<img @load='initCavnas'  class="zmiti-cache-img" :src="imgs.bg1" alt="" ref='img'>
+		<section class="lt-full">
+			<div class="zmiti-title">
+				<img :src="imgs.title" alt="">
+				
+			</div>
 
-		<!--message-dialog-->
+			<div class="zmiti-border">
+				<img :src="imgs.border" alt="">
+				<div class="zmiti-xdd" :style="{WebkitTransform:'translate3d('+transX+'px,'+transY+'px,0)'}">
+					<img :src="imgs.xdd" alt="">
+				</div>
+			</div>
+
+			<div class="zmiti-index-bottom">
+				<div class="zmiti-btn2">
+					<img :src="imgs.btn2" alt="">
+					<span>跟着总书记去种树</span>
+				</div>
+				<div class="zmiti-logo">
+					<img :src="imgs.logo" alt="">
+					<span>新华社新媒体中心</span>
+				</div>
+			</div>
+		</section>
 		
-		<Toast :msg='toastMsg'></Toast>
 	</div>
 </template>
 
@@ -36,15 +50,10 @@
 				imgs,
 				show:true,
 				toastMsg:'',
-				animate:false,
-				viewW:750,
 				showBtns:false,
-				viewH:1206,
 				showMasks:false,
-				scale:1,
-				width:1875,
-				height:3015,
-
+				transX:0,
+				transY:0,
 				createImg:'',
 			}
 		},
@@ -119,99 +128,7 @@
 					      height:dom.clientHeight
 					})
 				},100)
-			},
-			initCavnas(){
-
-				var canvas = this.$refs['canvas'];
-				var context = canvas.getContext('2d');
-
-
-
-				var s = this;
-				var scale = 2.5;
-				//context.drawImage(this.$refs['img'],1126,740,s.viewW,s.viewH,0,0,s.viewW,s.viewH);
-				var w = s.viewW,
-					h = s.viewH;
-				
-					var x = 1352;
-					var y = 1592;
-
-					var w1 = s.viewW,
-						h1 = s.viewH;
-
-					var scale1 = 1;
-
-					var scale2 = 1;
-
-					var i = 0;
-					var j = 0;
-
-					var speed  = 1.004;
-
-					var sourceImg = this.$refs['img'];
-					var p0Img = this.$refs['imgp0'];
-
-					/*context.drawImage(this.$refs['imgp0'],0,y,w,h,0,0,s.viewW,s.viewH);
-					context.drawImage(this.$refs['img'],0,0,w*2,h*2,0,0,s.viewW,s.viewH);*/
-					var t = setInterval(()=>{
-							
-							 w1 *= speed,
-								 h1 *= speed;
-							context.clearRect(0,0,s.viewW,s.viewH);
-							 if(scale<=1){
-							 	scale = 1;
-							 	 scale1*=speed;
-							 	 ///scale1*=speed;
-							 	 w = s.viewW,
-								 h = s.viewH;
-								 w *=scale1,
-								 h *=scale1;
-
-								i+=1;
-								j+=4.54;
-								//context.drawImage(this.$refs['imgp0'],0,0,w,h,0,0,s.viewW,s.viewH);
-
-								context.drawImage(p0Img,s.viewW*1275/1875*2.5-j,s.viewH*1371/3015*2.5-j,w-1,h-4,0,0,s.viewW,s.viewH);
-
-								//context.drawImage(sourceImg,0,0,w1,h1,i*scale1,i*scale1,s.viewW,s.viewH); 
-								 	//context.translate(s.viewW*1275/1875,s.viewH*1372/3015);
-									//context.drawImage(sourceImg,0,0,w1*scale2,h1*scale2,0,0,s.viewW,s.viewH); 		
-
-								if(scale1>=2.5){
-									console.log(w1,w);
-								 	clearInterval(t);
-								 	//context.drawImage(p0Img,0,0,s.viewW*2.5,s.viewH*2.5,0,0,s.viewW,s.viewH);
-								 	context.scale(1.002,1.002);
-									context.drawImage(p0Img,s.viewW*1275/1875*2.5-j,s.viewH*1371/3015*2.5-j,w-1,h-4,0,0,s.viewW,s.viewH);
-									
-								///	context.drawImage(sourceImg,0,0,w1,h1,j*2.5,j*2.5,s.viewW,s.viewH); 
-								 	//context.translate(s.viewW*1275/1875,s.viewH*1372/3015);
-
-									//context.drawImage(sourceImg,0,0,w1*scale2,h1*scale2,0,0,s.viewW,s.viewH); 	
-								 }
-							 	//clearInterval(t);
-							 }else{
-
-							 	 
-							 	 scale/=speed;
-							 	 
-								 w = s.viewW/scale,
-								 h = s.viewH/scale;
-								///context.drawImage(p0Img,s.viewW*1275/1875*2.5,s.viewH*1371/3015*2.5,w-1,h-4,0,0,s.viewW,s.viewH);
-								i++;
-								j++;
-								context.drawImage(p0Img,s.viewW*1275/1875*2.5-i,s.viewH*1371/3015*2.5-i,w-1,h-4,0,0,s.viewW,s.viewH);
-
-								context.drawImage(sourceImg,0,0,w1,h1,i*scale ,i*scale,s.viewW,s.viewH); 	
-								context.save();
-							 	
-								context.restore();
-							 }
-
-							 //scale-=.02;
-						},10)
-
-			}
+			} 
 			
 			
 		},
@@ -235,7 +152,37 @@
 						zmitiUtil.wxConfig('做新时代雷锋，今年我要做'+this.num+'件好事，立此存证',window.desc,url)
 				}
 			})
- 
+
+			var s = this;
+ 			window.addEventListener("deviceorientation", function(event) {
+			      
+			      document.title = (event.alpha|0 )+ ',' + (event.beta|0 )+ ','+(event.gamma|0);
+
+			      var x =  event.gamma|0,
+			      	  y = event.beta|0;
+
+			      if(x<-15){
+			      	x=-15;
+			      }
+			      if(x>15){
+			      	x=15
+			      }
+			      if(y<-10){
+			      	y=-10;
+			      }
+			      if(y>10){
+			      	y=10
+			      }
+			      s.transX = x;
+			      s.transY = y;
+
+
+
+
+
+			      
+
+			}, true);
 
 		}
 	}

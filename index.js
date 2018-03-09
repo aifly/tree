@@ -34,7 +34,7 @@ new Vue({
 	el: '#app',
 	/*<audio ref='audio' src='./assets/music/bg.mp3'  loop></audio>*/
 	template: `<div>
-		<Index  :obserable='obserable'></Index>
+		<Index v-if='show'  :obserable='obserable'></Index>
 		
 		<div hidden @click='toggleMusic' class='zmiti-play' :class='{"rotate":rotate}' :style="playStyle">
 			<img  :src='imgs.play'/>
@@ -84,7 +84,7 @@ new Vue({
 				url: window.protocol + '//api.zmiti.com/v2/custom/update_pvnum/',
 				type: 'post',
 				data: {
-					customid: 43
+					customid: 45
 				}
 			});
 		}
@@ -101,7 +101,7 @@ new Vue({
 
 		this.isShare = src && num;
 
-		this.show = true;
+
 
 		this.src = src;
 
@@ -110,8 +110,8 @@ new Vue({
 			this.width = s * 100 | 0;
 
 		}, () => {
+			this.show = true;
 			this.loaded = true;
-
 
 		})
 

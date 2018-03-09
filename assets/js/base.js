@@ -1,10 +1,26 @@
 var imgs = {
 	play: './assets/images/play.png',
+	title: './assets/images/title.png',
+	leaf1: './assets/images/leaf1.png',
+	leaf2: './assets/images/leaf2.png',
 	logo: './assets/images/logo.png',
-	bg: './assets/images/bg.jpg',
 	bg1: './assets/images/bg1.jpg',
-	p0: './assets/images/p0.jpg',
+	bg2: './assets/images/bg2.jpg',
+	bg3: './assets/images/bg3.jpg',
+	bg4: './assets/images/bg4.jpg',
+
+	xdd: './assets/images/xdd.jpg',
+
 	arrow: './assets/images/arrow.png',
+	btn1: './assets/images/btn1.png',
+	border: './assets/images/border.png',
+	brand: './assets/images/brand.png',
+	bucket1: './assets/images/bucket1.png',
+
+	bucket: './assets/images/bucket.gif',
+	person: './assets/images/person.gif',
+
+	btn2: './assets/images/btn2.png',
 	qrcode: './assets/images/qrcode1.png',
 
 

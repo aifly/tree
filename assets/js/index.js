@@ -100,7 +100,7 @@
 			username: '',
 			wish: '',
 			width: 0,
-			pv: 0,
+			pv: 1325121,
 			randomPv: 0,
 			loaded: false,
 			nickname: '',

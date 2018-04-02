@@ -109,7 +109,7 @@ var zmitiUtil = {
 
 	},
 
-	getOauthurl: function() {
+	getOauthurl: function(obserable) {
 		var s = this;
 		var {
 			wxappid,
@@ -120,7 +120,22 @@ var zmitiUtil = {
 		if (!s.isWeiXin()) {
 			return;
 		}
-
+		if(window.localStorage.getItem('nickname') && window.localStorage.getItem('headimgurl')){
+			window.nickname = window.localStorage.getItem('nickname');
+			window.headimgurl = window.localStorage.getItem('headimgurl');
+			if (obserable) {
+				setTimeout(()=>{
+					obserable.trigger({
+						type: 'setUserInfo',
+						data: {
+							nickname: window.nickname,
+							headimgurl: window.headimgurl
+						}
+					});
+				},3000)
+			}
+			return;
+		}
 		$.ajax({
 			type: 'post',
 			//url: window.baseUrl + '/weixin/getwxuserinfo/',
@@ -135,7 +150,6 @@ var zmitiUtil = {
 
 				if (dt.getret === 0) {
 
-
 					s.openid = dt.userinfo.openid;
 					s.nickname = dt.userinfo.nickname;
 					s.headimgurl = dt.userinfo.headimgurl;
@@ -144,15 +158,34 @@ var zmitiUtil = {
 					window.headimgurl = s.headimgurl;
 					window.openid = s.openid;
 
+					window.localStorage.setItem('nickname',window.nickname);
+					window.localStorage.setItem('headimgurl',window.headimgurl);
+
+
+
+					if (obserable) {
+						obserable.trigger({
+							type: 'setUserInfo',
+							data: {
+								nickname: s.nickname,
+								headimgurl: s.headimgurl
+							}
+						})
+
+					}
+
 					//var URI = window.location.href.split('#')[0];
 
 					//s.wxConfig('为你圆梦', '@留守儿童 新华社喊你来许愿！有机会得团圆基金哦');
 
 				} else {
 					if (s.isWeiXin()) {
+
+						
+
 						var wish = s.getQueryString('src');
 						var nickname = s.getQueryString('nickname');
-						var address = s.getQueryString('address');
+						var num = s.getQueryString('num');
 
 						var redirect_uri = window.location.href.split('?')[0];
 
@@ -162,8 +195,8 @@ var zmitiUtil = {
 						if (nickname) {
 							redirect_uri = s.changeURLPar(redirect_uri, 'nickname', (nickname));
 						}
-						if (address) {
-							redirect_uri = s.changeURLPar(redirect_uri, 'address', (address));
+						if (num) {
+							redirect_uri = s.changeURLPar(redirect_uri, 'num', (num));
 						}
 
 						$.ajax({
@@ -178,6 +211,7 @@ var zmitiUtil = {
 							},
 							error: function() {},
 							success: function(dt) {
+								
 								if (dt.getret === 0) {
 									window.location.href = dt.url;
 								}

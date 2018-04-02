@@ -1,10 +1,9 @@
 /*
- html2canvas 0.5.0-beta3 <http://html2canvas.hertzen.com>
- Copyright (c) 2016 Niklas von Hertzen
- Released under  License
- */
+  html2canvas 0.5.0-beta3 <http://html2canvas.hertzen.com>
+  Copyright (c) 2016 Niklas von Hertzen
 
-
+  Released under  License
+*/
 
 ! function(e) {
     if ("object" == typeof exports && "undefined" != typeof module) module.exports = e();
@@ -476,9 +475,7 @@
                      */
                     function toUnicode(domain) {
                         return mapDomain(domain, function(string) {
-                            return regexPunycode.test(string) ?
-                                decode(string.slice(4).toLowerCase()) :
-                                string;
+                            return regexPunycode.test(string) ? decode(string.slice(4).toLowerCase()) : string;
                         });
                     }
 
@@ -492,9 +489,7 @@
                      */
                     function toASCII(domain) {
                         return mapDomain(domain, function(string) {
-                            return regexNonASCII.test(string) ?
-                                'xn--' + encode(string) :
-                                string;
+                            return regexNonASCII.test(string) ? 'xn--' + encode(string) : string;
                         });
                     }
 
@@ -980,9 +975,10 @@
 
                 var node = ((nodeList === undefined) ? [document.documentElement] : ((nodeList.length) ? nodeList : [nodeList]))[0];
                 node.setAttribute(html2canvasNodeAttribute + index, index);
-                width = options.width != null ? options.width : node.ownerDocument.defaultView.innerWidth;
-                height = options.height != null ? options.height : node.ownerDocument.defaultView.innerHeight;
+                var width = options.width != null ? options.width : node.ownerDocument.defaultView.innerWidth;
+                var height = options.height != null ? options.height : node.ownerDocument.defaultView.innerHeight;
                 return renderDocument(node.ownerDocument, options, width, height, index).then(function(canvas) {
+
                     if (typeof(options.onrendered) === "function") {
                         log("options.onrendered is deprecated, html2canvas returns a Promise containing the canvas");
                         options.onrendered(canvas);
@@ -991,8 +987,7 @@
                 });
             }
 
-            window.html2canvas = html2canvas
-
+            window.html2canvas = html2canvas;
             html2canvas.CanvasRenderer = CanvasRenderer;
             html2canvas.NodeContainer = NodeContainer;
             html2canvas.log = log;
@@ -1013,7 +1008,6 @@
             function renderDocument(document, options, windowWidth, windowHeight, html2canvasIndex) {
                 return createWindowClone(document, document, windowWidth, windowHeight, options, document.defaultView.pageXOffset, document.defaultView.pageYOffset).then(function(container) {
                     log("Document cloned");
-
                     var attributeName = html2canvasNodeAttribute + html2canvasIndex;
                     var selector = "[" + attributeName + "='" + html2canvasIndex + "']";
                     document.querySelector(selector).removeAttribute(attributeName);
@@ -1033,12 +1027,12 @@
                 var bounds = getBounds(node);
                 var width = options.type === "view" ? windowWidth : documentWidth(clonedWindow.document);
                 var height = options.type === "view" ? windowHeight : documentHeight(clonedWindow.document);
-                console.log()
-                var renderer = new options.renderer(width, height, imageLoader, options, node.ownerDocument);
+                var renderer = new options.renderer(width, height, imageLoader, options, document);
                 var parser = new NodeParser(node, renderer, support, imageLoader, options);
                 return parser.ready.then(function() {
                     log("Finished rendering");
                     var canvas;
+
                     if (options.type === "view") {
                         canvas = crop(renderer.canvas, {
                             width: renderer.canvas.width,
@@ -1048,22 +1042,8 @@
                             x: 0,
                             y: 0
                         });
-                    } else if (node === clonedWindow.document.body || node === clonedWindow.document.documentElement) {
+                    } else if (node === clonedWindow.document.body || node === clonedWindow.document.documentElement || options.canvas != null) {
                         canvas = renderer.canvas;
-                    } else if (options.scale && options.canvas != null) {
-                        log("放大canvas", options.canvas);
-                        var scale = options.scale || 1;
-                        console.log(bounds.top * scale)
-                        canvas = crop(renderer.canvas, {
-                            width: bounds.width * scale,
-                            height: bounds.height * scale,
-                            top: bounds.top * scale,
-                            left: bounds.left * scale,
-                            x: 0,
-                            y: 0
-                        });
-                        // console.log(canvas.width)
-
                     } else {
                         canvas = crop(renderer.canvas, {
                             width: options.width != null ? options.width : bounds.width,
@@ -1097,7 +1077,6 @@
                 croppedCanvas.height = bounds.height;
                 var width = x2 - x1;
                 var height = y2 - y1;
-
                 log("Cropping canvas at:", "left:", bounds.left, "top:", bounds.top, "width:", width, "height:", height);
                 log("Resulting crop with width", bounds.width, "and height", bounds.height, "with x", x1, "and y", y1);
                 croppedCanvas.getContext("2d").drawImage(canvas, x1, y1, width, height, bounds.x, bounds.y, width, height);
@@ -1323,9 +1302,11 @@
                     self.image.onload = resolve;
                     self.image.onerror = reject;
                     if (cors) {
-                        self.image.crossOrigin = "anonymous";
+                        //self.image.crossOrigin = "anonymous";
+                        self.image.crossOrigin = "";
                     }
-                    self.image.src = src;
+                    //self.image.src = src;
+                    self.image.src = src + '?t=' + new Date().getTime();
                     if (self.image.complete === true) {
                         resolve(self.image);
                     }

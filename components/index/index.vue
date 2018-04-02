@@ -1,32 +1,30 @@
 <template>
 	<div  class="lt-full zmiti-index-main-ui "  :class="{'show':show}">
 		<div class="zmiti-leaf">
-			<img :src="imgs.leaf1" alt="">
+			<img @touchstart='touchstart' :src="imgs.leaf1" alt="">
 		</div>
 		<div class="zmiti-leaf zmiti-leaf1">
-			<img :src="imgs.leaf2" alt="">
+			<img @touchstart='touchstart' :src="imgs.leaf2" alt="">
 		</div>
 
 		<section class="lt-full">
 			<div class="zmiti-title">
-				<img :src="imgs.title" alt="">
-				
+				<img @touchstart='touchstart' :src="imgs.title" alt="">
 			</div>
 
 			<div class="zmiti-border">
-				<img :src="imgs.border" alt="">
 				<div class="zmiti-xdd" :style="{WebkitTransform:'translate3d('+transX+'px,'+transY+'px,0)'}">
-					<img :src="imgs.xdd" alt="">
+					<img @touchstart='touchstart' :src="imgs.xdd" alt="">
 				</div>
 			</div>
 
 			<div class="zmiti-index-bottom">
-				<div class="zmiti-btn2">
-					<img :src="imgs.btn2" alt="">
+				<div class="zmiti-btn2" @touchend='entry'>
+					<img @touchstart='touchstart' :src="imgs.btn2" alt="">
 					<span>跟着总书记去种树</span>
 				</div>
 				<div class="zmiti-logo">
-					<img :src="imgs.logo" alt="">
+					<img @touchstart='touchstart' :src="imgs.logo" alt="">
 					<span>新华社新媒体中心</span>
 				</div>
 			</div>
@@ -55,6 +53,7 @@
 				transX:0,
 				transY:0,
 				createImg:'',
+
 			}
 		},
 		components:{
@@ -62,6 +61,18 @@
 		},
 		
 		methods:{
+
+			touchstart(e){
+				e.preventDefault();
+			},
+
+			entry(){
+				var {obserable} = this;
+				obserable.trigger({
+					type:'showTreeApp'
+				});
+
+			},
 			
 			toast(msg='提交成功',time=2000){
 				this.toastMsg = msg;
@@ -84,79 +95,29 @@
 			},
 			afterEnter(){
 				this.showBtns = true;
-			},
-			html2img(){
-				var s = this;
-				var {obserable} = this;
-				setTimeout(()=>{
-
-					var ref = 'zmiti-cache-page';
-					var dom = this.$refs[ref];
-					html2canvas(dom,{
-						useCORS: true,
-						onrendered: function(canvas) {
-					        var url = canvas.toDataURL();
-					        $.ajax({
-					          //url: window.protocol+'//api.zmiti.com/v2/share/base64_image/',
-					          url:window.protocol+'//'+window.server+'.zmiti.com/v2/share/base64_image/',
-					          type: 'post',
-					          data: {
-					            setcontents: url,
-					            setwidth: dom.clientWidth,
-					            setheight:dom.clientHeight
-					          },
-					          success: function(data) {
-					          	//alert('data.getret =>'+data.getret)
-					            if (data.getret === 0) {
-					            	//s.deleteImg(dt.img);
-					              var src = data.getimageurl;
-					             	s.createImg = src;
-	
-									var url = window.location.href.split('#')[0];
-
-									url = zmitiUtil.changeURLPar(url,'src',src);
-									url = zmitiUtil.changeURLPar(url,'num',s.num);
-									zmitiUtil.wxConfig('做新时代雷锋，今年我要做'+s.num+'件好事，立此存证',window.desc,url)
-								       
-					            }
-
-					          }
-					        })
-
-					      },
-					      width: dom.clientWidth,
-					      height:dom.clientHeight
-					})
-				},100)
-			} 
+			}
 			
 			
 		},
 		mounted(){
 
-			var {obserable} = this;
 
 
-
-			obserable.on('showIndexApp',(data)=>{
-				this.show = true;
-				if(data){
-					this.createImg = data.src;
-					this.src = data.src;
-					this.num = data.num;
-
-					var url = window.location.href.split('#')[0];
-
-						url = zmitiUtil.changeURLPar(url,'src',this.src);
-						url = zmitiUtil.changeURLPar(url,'num',this.num);
-						zmitiUtil.wxConfig('做新时代雷锋，今年我要做'+this.num+'件好事，立此存证',window.desc,url)
-				}
-			})
+			
 
 			var s = this;
+			s.lastX = '';
+			s.lastY = '';
+			var i =0 ;
+			var startX,startY;
  			window.addEventListener("deviceorientation", function(event) {
 			      
-			      document.title = (event.alpha|0 )+ ',' + (event.beta|0 )+ ','+(event.gamma|0);
+
+			     // document.title = event.beta|0;
+			    /*  i++;
+			      if(i===1){
+			      	startY = event.beta;
+			      }
 
 			      var x =  event.gamma|0,
 			      	  y = event.beta|0;
@@ -167,20 +128,27 @@
 			      if(x>15){
 			      	x=15
 			      }
-			      if(y<-10){
-			      	y=-10;
+			      if(y-startY<-10){
+			      	y=-10+startY;
 			      }
-			      if(y>10){
-			      	y=10
+			      if(y-startY>10){
+			      	y=10+startY
 			      }
-			      s.transX = x;
-			      s.transY = y;
+
+			      if(s.lastX!==''){
+			     	 
+			      }
+			      if(s.lastY !== ''){
+			      	
+			      }
+
+			      s.transX = x ;*/
+			      //s.transY = y;
+
+			    
 
 
-
-
-
-			      
+			    	      
 
 			}, true);
 

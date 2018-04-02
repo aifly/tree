@@ -1,39 +1,4 @@
 ﻿@import "../css/base.scss";
-
-html, body, div, p, ul, li, ol, dl, dt, dd, header, footer, video, h1, h2, h3, h4, canvas, section, figure {
-	padding: 0;
-	margin: 0;
-}
-
-a {
-	text-decoration: none;
-}
-
-li {
-	list-style: none;
-}
-
-html, body {
-	height: 100%;
-	-webkit-tap-highlight-color: transparent;
-}
-
-body {
-	font-family: "Helvetica Neue", 'Helvetica', "Microsoft YaHei", '微软雅黑', arial, sans-serif;
-	font-size: 30px;
-
-	&>div {
-	}
-
-}
-
-img {
-	border: none;
-	vertical-align: middle;
-	width: 100%;
-	height: auto;
-}
-
 $baseColor: #fcffb4;
 $viewW: 750px;
 $bgColor: #fcfff8;
@@ -41,7 +6,7 @@ $bgColor: #fcfff8;
 .zmiti-index-main-ui {
 	overflow: hidden;
 	width: 10rem;
-	left: 50%;
+	left: 50% !important;
 	margin-left: -$viewW/2;
 	background: $bgColor;
 
@@ -74,11 +39,14 @@ $bgColor: #fcfff8;
 	.zmiti-leaf {
 		@include pos(a);
 		left: 0;
+		z-index: 103;
+		width: 1rem;
 	}
 
 	.zmiti-leaf1 {
 		right: -.2rem;
 		left: auto;
+		z-index: 103;
 	}
 
 	&>section {
@@ -86,12 +54,17 @@ $bgColor: #fcfff8;
 	}
 
 	.zmiti-title {
-		width: 7rem;
+		width: 10rem;
 		height: 2rem;
 		@include pos(r);
+		padding-bottom: .4rem;
+		top: 4px;
+		z-index: 102;
+		
 
 		img {
-			margin-top: .8rem;
+			width: 8rem;
+			margin: 1.4rem auto 0;
 			display: block;
 		}
 
@@ -102,24 +75,28 @@ $bgColor: #fcfff8;
 		@include pos(r);
 		width: 10rem;
 		overflow: hidden;
+		background: $bgColor;
+		@include displayBox(vertical);
+
+
+
 
 		&>img {
-			width: 100%;
-			height: 100%;
+			
 			@include pos(a);
 			z-index: 100;
+
 		}
 
 		.zmiti-xdd {
-			@include pos(a);
-			z-index: 1;
-			width: 1050px;
-			height: 1050px;
+			
+			
 			@include transition(.1s);
+			box-sizing:border-box;
 
 			img {
 				width: 100%;
-				height: 100%;
+				
 			}
 
 		}
@@ -127,14 +104,19 @@ $bgColor: #fcfff8;
 	}
 
 	.zmiti-index-bottom {
-		height: 2.5rem;
+		height: 3rem;
 		width: 10rem;
 		box-sizing: border-box;
 		@include displayBox(vertical);
+		margin-top: -4px;
+		@include pos(r);
+		z-index: 20;
 
 		.zmiti-btn2 {
+			top:-.3rem;
 			@include pos(r);
 			color: #fffb88;
+			@include animation(scale .8s linear infinite alternate);
 
 			span {
 				@include pos(a);
@@ -149,13 +131,17 @@ $bgColor: #fcfff8;
 		}
 
 		.zmiti-logo {
+			margin-top: 80px;
 			img {
 				width: .8rem;
 				height: .8rem;
+				
 			}
+			@include pos(r);
+			top: -.5rem;
 
-			font-size: .38rem;
-			@include transform(scale(.8));
+			font-size: .30rem;
+			
 		}
 
 	}
@@ -218,5 +204,4 @@ $bgColor: #fcfff8;
 }
 
 .zmiti-play {
-	top: 2rem !important;
 }

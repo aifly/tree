@@ -4,28 +4,28 @@
 
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=750,user-scalable=no" />
-	<title>和总书记一起去种树</title>
+	<title>跟着习近平总书记植树播绿</title>
 	<style>
 		
 	</style>
 	<script>
 		document.getElementsByTagName('html')[0].style.fontSize = 750 / 10 + 'px';
 		window.protocol = location.protocol;
-		window.h5name = 'meetingnews';
+		window.h5name = 'tree';
 		window.customid = '2032998998';//两会号外
 
 		window.baseUrl = window.protocol+'//api.zmiti.com/v2';
 		window.wxappid = 'wxfacf4a639d9e3bcc';
 		window.wxappsecret='149cdef95c99ff7cab523d8beca86080';
 
-		window.server = 'bluesky';
+		window.server = 'api';
 		//xinhuanet
 		if(window.customid === '2032998998'){
 			window.baseUrl = window.protocol+'//h5.zhongguowangshi.com/'+h5name;
 			window.wxappid = 'wx5ec3d35069383211';
 			window.wxappsecret='d94ea41d9cd2ba03c7cab5fc0e212cec';
 		}
-		window.desc = '号外';
+		window.desc = '让祖国大地不断绿起来美起来';
 		document.addEventListener('touchmove',function(e){e.preventDefault()},{passive:false});
 
 	</script>
@@ -35,6 +35,7 @@
 </head>
 <body>
 	<div id="app"></div>
+	
 
 	<script src='./assets/js/base.js'></script>
 	<script>
@@ -42,7 +43,7 @@
 
 		function loadScript(src){
 			var script = document.createElement('script');
-			script.src =src;
+			script.src =src+"?t="+new Date().getTime();
 			document.body.appendChild(script)
 		}
 	    (function(){
@@ -54,10 +55,11 @@
 		/*
 
 		*/
-		//loadScript('./assets/js/index12.js');
+		loadScript('./assets/js/base.js');
+		loadScript('./assets/js/index.js');
 	</script>
 <!-- 
--->
 	<script src='http://localhost:4023/index.js' onerror="loadScript('./assets/js/index.js')"></script> 
+-->
 </body>
 </html>

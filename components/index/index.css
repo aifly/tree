@@ -34,34 +34,10 @@
   to {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg); } }
-html, body, div, p, ul, li, ol, dl, dt, dd, header, footer, video, h1, h2, h3, h4, canvas, section, figure {
-  padding: 0;
-  margin: 0; }
-
-a {
-  text-decoration: none; }
-
-li {
-  list-style: none; }
-
-html, body {
-  height: 100%;
-  -webkit-tap-highlight-color: transparent; }
-
-body {
-  font-family: "Helvetica Neue", 'Helvetica', "Microsoft YaHei", '微软雅黑', arial, sans-serif;
-  font-size: 30px; }
-
-img {
-  border: none;
-  vertical-align: middle;
-  width: 100%;
-  height: auto; }
-
 .zmiti-index-main-ui {
   overflow: hidden;
   width: 10rem;
-  left: 50%;
+  left: 50% !important;
   margin-left: -375px;
   background: #fcfff8; }
   .zmiti-index-main-ui .zmiti-createimg {
@@ -87,53 +63,65 @@ img {
       bottom: 0; }
   .zmiti-index-main-ui .zmiti-leaf {
     position: absolute;
-    left: 0; }
+    left: 0;
+    z-index: 103;
+    width: 1rem; }
   .zmiti-index-main-ui .zmiti-leaf1 {
     right: -.2rem;
-    left: auto; }
+    left: auto;
+    z-index: 103; }
   .zmiti-index-main-ui > section {
     display: -webkit-box;
     -webkit-box-align: center;
     -webkit-box-pack: center;
     -webkit-box-orient: vertical; }
   .zmiti-index-main-ui .zmiti-title {
-    width: 7rem;
+    width: 10rem;
     height: 2rem;
-    position: relative; }
+    position: relative;
+    padding-bottom: .4rem;
+    top: 4px;
+    z-index: 102; }
     .zmiti-index-main-ui .zmiti-title img {
-      margin-top: .8rem;
+      width: 8rem;
+      margin: 1.4rem auto 0;
       display: block; }
   .zmiti-index-main-ui .zmiti-border {
     -webkit-box-flex: 1;
     position: relative;
     width: 10rem;
-    overflow: hidden; }
+    overflow: hidden;
+    background: #fcfff8;
+    display: -webkit-box;
+    -webkit-box-align: center;
+    -webkit-box-pack: center;
+    -webkit-box-orient: vertical; }
     .zmiti-index-main-ui .zmiti-border > img {
-      width: 100%;
-      height: 100%;
       position: absolute;
       z-index: 100; }
     .zmiti-index-main-ui .zmiti-border .zmiti-xdd {
-      position: absolute;
-      z-index: 1;
-      width: 1050px;
-      height: 1050px;
       -webkit-transition: 0.1s;
-      transition: 0.1s; }
+      transition: 0.1s;
+      box-sizing: border-box; }
       .zmiti-index-main-ui .zmiti-border .zmiti-xdd img {
-        width: 100%;
-        height: 100%; }
+        width: 100%; }
   .zmiti-index-main-ui .zmiti-index-bottom {
-    height: 2.5rem;
+    height: 3rem;
     width: 10rem;
     box-sizing: border-box;
     display: -webkit-box;
     -webkit-box-align: center;
     -webkit-box-pack: center;
-    -webkit-box-orient: vertical; }
+    -webkit-box-orient: vertical;
+    margin-top: -4px;
+    position: relative;
+    z-index: 20; }
     .zmiti-index-main-ui .zmiti-index-bottom .zmiti-btn2 {
+      top: -.3rem;
       position: relative;
-      color: #fffb88; }
+      color: #fffb88;
+      -webkit-animation: scale 0.8s linear infinite alternate;
+      animation: scale 0.8s linear infinite alternate; }
       .zmiti-index-main-ui .zmiti-index-bottom .zmiti-btn2 span {
         position: absolute;
         width: 100%;
@@ -143,9 +131,10 @@ img {
         text-align: center;
         font-size: .38rem; }
     .zmiti-index-main-ui .zmiti-index-bottom .zmiti-logo {
-      font-size: .38rem;
-      -webkit-transform: scale(0.8);
-      transform: scale(0.8); }
+      margin-top: 80px;
+      position: relative;
+      top: -.5rem;
+      font-size: .30rem; }
       .zmiti-index-main-ui .zmiti-index-bottom .zmiti-logo img {
         width: .8rem;
         height: .8rem; }
@@ -188,8 +177,5 @@ img {
       color: #fff;
       font-family: Georgia;
       font-size: .7rem; }
-
-.zmiti-play {
-  top: 2rem !important; }
 
 /*# sourceMappingURL=index.css.map */

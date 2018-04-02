@@ -14,7 +14,7 @@ var imgs = {
 	bg4: './assets/images/bg4.jpg',
 	bg5: './assets/images/bg5.jpg',
 
-	xdd: './assets/images/xdd1.jpg',
+	xdd: './assets/images/xdd2.jpg',
 
 	arrow: './assets/images/arrow.png',
 	btn1: './assets/images/btn3.png',

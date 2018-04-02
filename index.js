@@ -11,7 +11,7 @@ import './components/lib/touch.js';
 
 var obserable = new Obserable();
 
-zmitiUtil.getOauthurl(obserable);
+//zmitiUtil.getOauthurl(obserable);
 
 
 //Vue.config.productionTip = false

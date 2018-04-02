@@ -342,7 +342,8 @@
         top: 200px;
         left: 1rem;
         color: #947002;
-        font-size: .5rem; }
+        font-family: Georgia;
+        font-size: 1rem; }
         .zmiti-tree-main-ui .zmiti-clip-page .zmiti-clip-img .zmiti-userinfo > div {
           display: inline-block;
           width: 1rem;

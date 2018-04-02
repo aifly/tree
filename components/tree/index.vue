@@ -71,8 +71,8 @@
 						</div>
 
 						<div class="zmiti-userinfo">
-							<img :src="headimgurl||imgs.logo" >
-							{{nickname||'新华社网友'}}
+							<img style="opacity:0;display:none" :src="headimgurl||imgs.logo" >
+							我是
 						</div>
 						<div class="zmiti-rank">
 							第<span>{{pv}}</span>位
@@ -175,7 +175,7 @@
 				showClipImg:false,
 				date:'',
 				index:0,
-				canShare:false,
+				canShare:true,
 				frameHref:'',
 				showTeam:false,
 				addOneAnimate:false,
